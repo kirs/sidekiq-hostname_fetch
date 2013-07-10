@@ -37,7 +37,7 @@ With this option, task will be always performed on the same server it was enquee
 
 ## Simple demo
 
-(you can puck up `demo.rb` from this repo)
+(you can pick up `demo.rb` from this repo)
 
 Start up sidekiq via
 
@@ -54,9 +54,9 @@ bundle exec irb -r ./demo.rb
 where you can then say
 
 ```ruby
-HardWorker.perform_async <-- without plugin
+HardWorker.perform_async # <-- without plugin
 HardWorker.perform_async_for_host "myhost" # <-- won't work
-HardWorker.perform_async_for_host `hostname`.strip # <-- gonna work
+HardWorker.perform_async_for_host `hostname`.strip # <-- gonna work on your machine
 ```
 
 ## Contributing
