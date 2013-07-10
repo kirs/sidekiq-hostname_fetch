@@ -1,3 +1,6 @@
+require 'sidekiq'
+require 'sidekiq/worker'
+
 module Sidekiq::Worker::ClassMethods
   CURRENT_HOST = `hostname`.strip
 

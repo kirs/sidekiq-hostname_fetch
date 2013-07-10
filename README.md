@@ -20,6 +20,29 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+
+## Demo
+
+Start up sidekiq via
+
+```
+bundle exec sidekiq -r ./demo.rb
+```
+
+and then you can open up an IRB session like so:
+
+```ruby
+bundle exec irb -r ./demo.rb
+```
+
+where you can then say
+
+```ruby
+HardWorker.perform_async <-- without plugin
+HardWorker.perform_async_for_host "myhost" # <-- won't work
+HardWorker.perform_async_for_host `hostname`.strip # <-- gonna work
+```
+
 ## Contributing
 
 1. Fork it
