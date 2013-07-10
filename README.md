@@ -1,27 +1,43 @@
-# Sidekiq::HostnameFetch
+# Sidekiq::HostnameFetch Strategy
 
-TODO: Write a gem description
+Imagine: you have 10 sidekiq job servers and you want to enque some job on specific server. With this strategy you can easily do this.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'sidekiq-hostname_fetch'
+    gem 'sidekiq-hostname_fetch', github: "kirs/sidekiq-hostname_fetch"
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install sidekiq-hostname_fetch
-
 ## Usage
 
-TODO: Write usage instructions here
+Define the hostname strategy:
 
+```ruby
+Sidekiq.configure_server do |config|
+  config.options[:fetch] = Sidekiq::HostnameFetch::Strategy
+end
+```
 
-## Demo
+Now Sidekiq server will fetch tasks also from hostname-specific queues.
+
+To send jobs to specific server, you can use:
+
+```
+MyWorker.perform_async_for_host "app-03.beta.myproject.com", "arg_to_worker", "another_arg"
+```
+
+As well as `perform_in_for_host` and `perform_at_for_host`.
+
+Another way is to declate `sidekiq_options host_specific: true` inside the worker.
+With this option, task will be always performed on the same server it was enqueed.
+
+## Simple demo
+
+(you can puck up `demo.rb` from this repo)
 
 Start up sidekiq via
 
