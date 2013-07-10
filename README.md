@@ -2,6 +2,10 @@
 
 Imagine: you have 10 sidekiq job servers and you want to enque some job on specific server. With this strategy you can easily do this.
 
+Sponsored by [Evil Martians](http://evl.ms).
+
+Thanks to [Yaroslav Markin](https://github.com/yaroslav) and [Alexey Gaziev](https://github.com/gazay) for advice about making this project.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -66,9 +70,3 @@ HardWorker.perform_async_for_host `hostname`.strip # <-- gonna work on your mach
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
-
-## Authors
-
-Made by [Kir Shatrov](https://github.com/kirs), sponsored by [Evil Martians](http://evl.ms).
-
-Thanks to [Yaroslav Markin](https://github.com/yaroslav) and [Alexey Gaziev](https://github.com/gazay) for advice about making this project.
