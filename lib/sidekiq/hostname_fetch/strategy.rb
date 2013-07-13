@@ -12,7 +12,6 @@ module Sidekiq
         @queues = options[:queues].map { |q| "queue:#{q}" }
         @queues = @queues.map { |q| [q, "#{q}_host_#{CURRENT_HOSTNAME}"] }.flatten
 
-        puts "@queues", @queues.join(",")
         @unique_queues = @queues.uniq
       end
     end
