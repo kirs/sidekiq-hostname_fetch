@@ -1,5 +1,7 @@
 # Sidekiq::HostnameFetch Strategy
 
+[![Build Status](https://travis-ci.org/kirs/sidekiq-hostname_fetch.png?branch=master)](https://travis-ci.org/kirs/sidekiq-hostname_fetch)
+
 Imagine: you have 10 sidekiq job servers and you want to enque some job on specific server. With this strategy you can easily do this.
 
 Sponsored by [Evil Martians](http://evl.ms).
