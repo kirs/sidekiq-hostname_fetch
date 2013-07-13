@@ -6,7 +6,7 @@ module Sidekiq::Worker::ClassMethods
     @host_specific_worker ||= get_sidekiq_options["host_specific"]
 
     if @host_specific_worker
-      perform_async_for_host current_host, *args
+      perform_async_for_host current_hostname, *args
     else
       client_push('class' => self, 'args' => args)
     end
@@ -28,7 +28,7 @@ module Sidekiq::Worker::ClassMethods
     "#{worker_queue}_host_#{host}"
   end
 
-  def current_host
-    @current_host ||= `hostname`.strip
+  def current_hostname
+    @current_hostname ||= `hostname`.strip
   end
 end

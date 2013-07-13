@@ -45,7 +45,7 @@ describe Sidekiq::Worker do
 
   describe "workers with host_specific option" do
     it do
-      TestWorker.stub(:current_host).and_return("job-01.rspec-runner.com")
+      TestWorker.stub(:current_hostname).and_return("job-01.rspec-runner.com")
 
       TestWorker.should_receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
