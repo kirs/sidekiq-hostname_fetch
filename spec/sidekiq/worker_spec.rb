@@ -21,6 +21,18 @@ describe Sidekiq::Worker do
     end
   end
 
+  describe "#perform_async_on_current_host" do
+    it do
+      TestWorker.stub(:current_hostname).and_return("job-01.rspec-runner.com")
+
+      TestWorker.should_receive(:client_push).with do |args|
+        expect(args["args"]).to eq(["arg1","arg2"])
+        expect(args["queue"]).to eq("important_host_job-01.rspec-runner.com")
+      end
+      TestWorker.perform_async_on_current_host("arg1", "arg2")
+    end
+  end
+
   describe "#perform_in_for_host" do
     it do
       TestWorker.should_receive(:client_push).with do |args|

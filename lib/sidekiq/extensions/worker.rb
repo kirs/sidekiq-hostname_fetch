@@ -16,6 +16,10 @@ module Sidekiq::Worker::ClassMethods
     client_push('class' => self, 'args' => args, 'queue' => queue_for_host(host))
   end
 
+  def perform_async_on_current_host(*args)
+    client_push('class' => self, 'args' => args, 'queue' => queue_for_host(current_hostname))
+  end
+
   def perform_in_for_host(interval, host, *args)
     int = interval.to_f
     ts = (int < 1_000_000_000 ? Time.now.to_f + int : int)
