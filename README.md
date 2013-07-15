@@ -33,10 +33,10 @@ Now Sidekiq server will fetch tasks also from hostname-specific queues.
 To send jobs to specific server, you can use:
 
 ```
-MyWorker.perform_async_for_host "app-03.beta.myproject.com", "arg_to_worker", "another_arg"
+MyWorker.perform_async_on_host "app-03.beta.myproject.com", "arg_to_worker", "another_arg"
 ```
 
-As well as `perform_in_for_host` and `perform_at_for_host`.
+As well as `perform_in_on_host` and `perform_at_on_host`.
 
 Another way is to declate `sidekiq_options host_specific: true` inside the worker.
 With this option, task will be always performed on the same server it was enqueed.
@@ -61,8 +61,8 @@ where you can then say
 
 ```ruby
 HardWorker.perform_async # <-- without plugin
-HardWorker.perform_async_for_host "myhost" # <-- won't work
-HardWorker.perform_async_for_host `hostname`.strip # <-- gonna work on your machine
+HardWorker.perform_async_on_host "myhost" # <-- won't work
+HardWorker.perform_async_on_host `hostname`.strip # <-- gonna work on your machine
 ```
 
 ## Contributing
