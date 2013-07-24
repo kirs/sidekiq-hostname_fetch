@@ -41,6 +41,8 @@ As well as `perform_in_on_host` and `perform_at_on_host`.
 Another way is to declate `sidekiq_options host_specific: true` inside the worker.
 With this option, task will be always performed on the same server it was enqueed.
 
+To perform only one job on current host, use `perform_async_on_current_host`.
+
 ## Simple demo
 
 (you can pick up `demo.rb` from this repo)
