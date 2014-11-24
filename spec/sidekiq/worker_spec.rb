@@ -13,7 +13,7 @@ describe Sidekiq::Worker do
 
   describe "#perform_async_on_host" do
     it do
-      TestWorker.should_receive(:client_push).with do |args|
+      allow_any_instance_of(TestWorker).to receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
         expect(args["queue"]).to eq("important_host_custom_host")
       end
@@ -23,9 +23,9 @@ describe Sidekiq::Worker do
 
   describe "#perform_async_on_current_host" do
     it do
-      TestWorker.stub(:current_hostname).and_return("job-01.rspec-runner.com")
+      allow_any_instance_of(TestWorker).to receive(:current_hostname).and_return('job-01.rspec-runner.com')
 
-      TestWorker.should_receive(:client_push).with do |args|
+      allow_any_instance_of(TestWorker).to receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
         expect(args["queue"]).to eq("important_host_job-01.rspec-runner.com")
       end
@@ -35,7 +35,7 @@ describe Sidekiq::Worker do
 
   describe "#perform_in_on_host" do
     it do
-      TestWorker.should_receive(:client_push).with do |args|
+      allow_any_instance_of(TestWorker).to receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
         expect(args["at"]).to be_within(1).of(current_time.to_i)
         expect(args["queue"]).to eq("important_host_custom_host")
@@ -46,7 +46,7 @@ describe Sidekiq::Worker do
 
   describe "#perform_at_on_host" do
     it do
-      TestWorker.should_receive(:client_push).with do |args|
+      allow_any_instance_of(TestWorker).to receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
         expect(args["at"]).to be_within(1).of(current_time.to_i)
         expect(args["queue"]).to eq("important_host_custom_host")
@@ -57,9 +57,9 @@ describe Sidekiq::Worker do
 
   describe "workers with host_specific option" do
     it do
-      TestWorker.stub(:current_hostname).and_return("job-01.rspec-runner.com")
+      allow_any_instance_of(TestWorker).to receive(:current_hostname).and_return('job-01.rspec-runner.com')
 
-      TestWorker.should_receive(:client_push).with do |args|
+      allow_any_instance_of(TestWorker).to receive(:client_push).with do |args|
         expect(args["args"]).to eq(["arg1","arg2"])
         expect(args["queue"]).to eq("important_host_job-01.rspec-runner.com")
       end

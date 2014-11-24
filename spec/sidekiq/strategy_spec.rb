@@ -5,7 +5,7 @@ describe Sidekiq::HostnameFetch::Strategy do
   let(:queues) { %w(queue1 queue1 queue2 queue2) }
 
   it do
-    described_class.any_instance.stub(:current_hostname).and_return("job-01.rspec-runner.com")
+    allow_any_instance_of(described_class).to receive(:current_hostname).and_return("job-01.rspec-runner.com")
     fetcher = described_class.new(options)
 
     fetcher_queues = fetcher.instance_variable_get("@queues")
