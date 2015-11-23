@@ -1,4 +1,3 @@
-require 'celluloid'
 require 'sidekiq'
 require 'sidekiq/fetch'
 
@@ -8,9 +7,11 @@ module Sidekiq
       def initialize(options)
         @strictly_ordered_queues = !!options[:strict]
         @queues = options[:queues].map { |q| "queue:#{q}" }
-        @queues = @queues.map { |q| [q, "#{q}_host_#{current_hostname}"] }.flatten
-
-        @unique_queues = @queues.uniq
+        @queues.unshift *@queues.map { |q| "#{q}_host_#{current_hostname}" }
+        if @strictly_ordered_queues
+          @queues = @queues.uniq
+          @queues << TIMEOUT
+        end
       end
 
       private
