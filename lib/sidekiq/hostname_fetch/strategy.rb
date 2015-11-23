@@ -1,4 +1,3 @@
-require 'celluloid'
 require 'sidekiq'
 require 'sidekiq/fetch'
 
@@ -6,11 +5,8 @@ module Sidekiq
   module HostnameFetch
     class Strategy < ::Sidekiq::BasicFetch
       def initialize(options)
-        @strictly_ordered_queues = !!options[:strict]
-        @queues = options[:queues].map { |q| "queue:#{q}" }
+        super
         @queues = @queues.map { |q| [q, "#{q}_host_#{current_hostname}"] }.flatten
-
-        @unique_queues = @queues.uniq
       end
 
       private

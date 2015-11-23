@@ -1,5 +1,4 @@
 require 'sidekiq/hostname_fetch'
-require 'celluloid/autostart'
 require 'sidekiq/fetch'
 
 Sidekiq.logger = nil
